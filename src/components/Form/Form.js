@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { add } from 'redux/store';
+import { nanoid } from 'nanoid';
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -23,7 +26,7 @@ const Form = ({ onSubmit }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    onSubmit({ name, number });
+    dispatch(add({ id: nanoid(3), name, number }));
     reset();
   };
 
@@ -78,7 +81,3 @@ const Form = ({ onSubmit }) => {
 };
 
 export default Form;
-
-Form.propTypes = {
-  onSubmit: PropTypes.func,
-};
